@@ -5,6 +5,10 @@ import { Form, Icon, Input, Button, Checkbox,message } from 'antd';
 import {postRequest} from "../../util";
 import loginLogo from '../../assets/images/loginLogo.png'
 import './LoginForm.less'
+import { createHashHistory } from 'history';
+
+let history = createHashHistory();
+
 const FormItem = Form.Item;
 class NormalLoginForm extends React.Component {
     constructor(){
@@ -14,7 +18,6 @@ class NormalLoginForm extends React.Component {
         e.preventDefault();
         let data = this.props.form.getFieldsValue()
         console.info("表单值：",data)
-        let history = this.context.router.history
         postRequest('http://localhost:8003/login',data).then(function(res){
             console.log(res);
             if(res.data.code==0){

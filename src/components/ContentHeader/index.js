@@ -20,42 +20,26 @@ class ContentHeader extends React.Component {
 
     render() {
         return (
-            <div className="container">
+            <div className="container" style={{paddingRight:'40px'}}>
                 <img src={LOGO} alt="浙江中海达空间信息技术有限公司" className="logoImg"/>
-                <Header className="header">
-                    <Icon
-                        className="trigger"
-                        type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
-                        onClick={this.toggle}
-                    />
-                </Header>
-
                 <Menu
                     className="menu"
                     onClick={this.handleClick}
                     selectedKeys={[this.state.current]}
                     mode="horizontal"
                 >
-                    <Menu.Item key="mail">
-                        <Icon type="mail" />Navigation One
+                    <Menu.Item key="index">
+                        <Icon type="appstore" />首页
                     </Menu.Item>
-                    <Menu.Item key="app" disabled>
-                        <Icon type="appstore" />Navigation Two
-                    </Menu.Item>
-                    <SubMenu title={<span className="submenu-title-wrapper"><Icon type="setting" />Navigation Three - Submenu</span>}>
-                        <MenuItemGroup title="Item 1">
-                            <Menu.Item key="setting:1">Option 1</Menu.Item>
-                            <Menu.Item key="setting:2">Option 2</Menu.Item>
-                        </MenuItemGroup>
-                        <MenuItemGroup title="Item 2">
-                            <Menu.Item key="setting:3">Option 3</Menu.Item>
-                            <Menu.Item key="setting:4">Option 4</Menu.Item>
-                        </MenuItemGroup>
+                    <SubMenu title={<span className="submenu-title-wrapper"><Icon type="user" />当前用户</span>}>
+                        <Menu.Item key="setting:1">个人信息</Menu.Item>
+                        <Menu.Item key="setting:2">安全设置</Menu.Item>
                     </SubMenu>
-                    <Menu.Item key="alipay">
-                        <a href="https://ant.design" target="_blank" rel="noopener noreferrer">Navigation Four - Link</a>
+                    <Menu.Item key="loadout">
+                        <Icon type="appstore" />退出
                     </Menu.Item>
                 </Menu>
+
 
             </div>
 
