@@ -1,10 +1,9 @@
 import React from 'react'
-import {Layout, Menu, Breadcrumb, Icon} from 'antd';
+import {Layout, Menu, Icon} from 'antd';
 import {BrowserRouter,Route,withRouter,NavLink,Switch} from 'react-router-dom'
 import './Navi.less'
 import Users from '../Users/UserList'
 import ProjectList from '../Projects/ProjectList'
-import logo from '../../assets/images/logo.png'
 import ContentHeader from '../ContentHeader'
 
 const {Header, Content, Footer, Sider} = Layout;

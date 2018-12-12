@@ -1,18 +1,15 @@
 import React from  'react'
-import { Menu, Icon,Layout } from 'antd';
+import { Menu, Icon } from 'antd';
 import LOGO from '../../assets/images/logo.png'
 import './ContentHeader.less'
 
 const SubMenu = Menu.SubMenu;
-const MenuItemGroup = Menu.ItemGroup;
-const {Header} = Layout;
 class ContentHeader extends React.Component {
     state = {
         current: 'mail',
     }
 
     handleClick = (e) => {
-        console.log('click ', e);
         this.setState({
             current: e.key,
         });
@@ -39,10 +36,7 @@ class ContentHeader extends React.Component {
                         <Icon type="appstore" />退出
                     </Menu.Item>
                 </Menu>
-
-
             </div>
-
         );
     }
 }

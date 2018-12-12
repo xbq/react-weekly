@@ -35,3 +35,7 @@ export const getRequest = (url, data = '') => {
         url: url,
     });
 }
+
+export const globalVar={
+    serverUrl:'http://localhost:8003'
+}
