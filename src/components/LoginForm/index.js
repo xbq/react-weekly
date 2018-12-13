@@ -7,7 +7,7 @@ import {postRequest} from "../../util";
 import loginLogo from '../../assets/images/loginLogo.png'
 import './LoginForm.less'
 import { createHashHistory } from 'history';
-import EditUser from "../Users/EditUser";
+import EditUser from "../Users/Register";
 
 let history = createHashHistory();
 

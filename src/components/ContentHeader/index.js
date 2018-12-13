@@ -2,6 +2,12 @@ import React from  'react'
 import { Menu, Icon } from 'antd';
 import LOGO from '../../assets/images/logo.png'
 import './ContentHeader.less'
+import {getRequest,globalVar} from "../../util";
+import { createHashHistory } from 'history';
+
+let history = createHashHistory();
+const {serverUrl} = globalVar;
+const loginoutUrl = serverUrl+'/logout'
 
 const SubMenu = Menu.SubMenu;
 class ContentHeader extends React.Component {
@@ -13,6 +19,12 @@ class ContentHeader extends React.Component {
         this.setState({
             current: e.key,
         });
+    }
+
+    handlelogout(){
+        getRequest(loginoutUrl).then(()=>{
+            history.push('/');
+        })
     }
 
     render() {
@@ -32,7 +44,7 @@ class ContentHeader extends React.Component {
                         <Menu.Item key="setting:1">个人信息</Menu.Item>
                         <Menu.Item key="setting:2">安全设置</Menu.Item>
                     </SubMenu>
-                    <Menu.Item key="loadout">
+                    <Menu.Item key="loadout" onClick={this.handlelogout}>
                         <Icon type="appstore" />退出
                     </Menu.Item>
                 </Menu>

@@ -6,9 +6,9 @@ import {
 const FormItem = Form.Item;
 const Option = Select.Option;
 
-class EditUser extends React.Component {
-    constructor(){
-        super();
+class Register extends React.Component {
+    constructor(props){
+        super(props);
     }
     state = {
         confirmDirty: false,
@@ -134,5 +134,5 @@ class EditUser extends React.Component {
     }
 }
 
-const WrappedEditUser = Form.create()(EditUser);
-export default WrappedEditUser;
+const WrappedRegister = Form.create()(Register);
+export default WrappedRegister;

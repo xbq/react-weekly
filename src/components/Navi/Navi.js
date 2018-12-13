@@ -19,8 +19,6 @@ class Navi extends React.Component {
     }
 
     render() {
-        const {location} = this.props;
-        console.log(location);
         return (
             <BrowserRouter>
                 <Layout style={{ minHeight: '100vh' }}>
@@ -79,7 +77,7 @@ class Navi extends React.Component {
                             </div>
                         </Content>
                         <Footer style={{ textAlign: 'center' }}>
-                            Ant Design ©2018 Created by Ant UED
+                            中海达项目管理系统 ©2018 Created by xbq
                         </Footer>
                     </Layout>
                 </Layout>
