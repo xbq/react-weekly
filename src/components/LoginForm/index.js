@@ -13,8 +13,11 @@ let history = createHashHistory();
 
 const FormItem = Form.Item;
 class NormalLoginForm extends React.Component {
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
+        this.state={
+            redirectToReferrer:false
+        }
     }
     handleSubmit(e){
         e.preventDefault();
@@ -36,6 +39,7 @@ class NormalLoginForm extends React.Component {
 
     render() {
         const {getFieldDecorator} = this.props.form;
+
         return (
             <BrowserRouter>
                 <div className="main">

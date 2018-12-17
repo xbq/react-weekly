@@ -23,6 +23,9 @@ class ContentHeader extends React.Component {
 
     handlelogout(){
         getRequest(loginoutUrl).then(()=>{
+            //1、清空登录信息
+
+            //2、返回登录页，下面的做法还是有点儿问题
             history.push('/');
         })
     }
