@@ -1,15 +1,15 @@
 import React from "react"
-import {BrowserRouter,Route,withRouter,NavLink,Switch} from 'react-router-dom'
+import {BrowserRouter,Redirect} from 'react-router-dom'
 import PropTypes from "proptypes"
 import '../../util'
 import { Form, Icon, Input, Button, Checkbox,message } from 'antd';
 import {postRequest} from "../../util";
 import loginLogo from '../../assets/images/loginLogo.png'
 import './LoginForm.less'
-import { createHashHistory } from 'history';
-import EditUser from "../Users/Register";
+import {globalVar} from '../../util'
 
-let history = createHashHistory();
+
+let {fakeAuth} = globalVar;
 
 const FormItem = Form.Item;
 class NormalLoginForm extends React.Component {
@@ -19,13 +19,15 @@ class NormalLoginForm extends React.Component {
             redirectToReferrer:false
         }
     }
-    handleSubmit(e){
+    handleSubmit=(e)=>{
         e.preventDefault();
         let data = this.props.form.getFieldsValue()
-        postRequest('http://localhost:8003/login',data).then(function(res){
-            console.log(res);
+        postRequest('http://localhost:8003/login',data).then((res)=>{
             if(res.data.code==0){
-                history.push('/manage');
+                fakeAuth.authenticate(() => {
+                    this.setState({ redirectToReferrer: true });
+                });
+                this.props.history.push('/manage/');
             }else{
                 message.error(res.data.message);
             }
@@ -33,15 +35,16 @@ class NormalLoginForm extends React.Component {
     }
 
     handleRegister(){
-        history.push('/userEdit');
+        this.props.history.push('/register/');
     }
 
 
     render() {
         const {getFieldDecorator} = this.props.form;
-
+        const {redirectToReferrer} = this.state;
+        let { from } = this.props.location.state || { from: { pathname: "/" } };
+        if (redirectToReferrer) return <Redirect to={from} />;
         return (
-            <BrowserRouter>
                 <div className="main">
                     <div className="header">
                         <img src={loginLogo} alt=""/>
@@ -92,8 +95,6 @@ class NormalLoginForm extends React.Component {
                         <p>技术支持：浙江中海达数据运营事业部xbq</p>
                     </div>
                 </div>
-            </BrowserRouter>
-
         );
     }
 }

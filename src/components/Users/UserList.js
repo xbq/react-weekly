@@ -9,13 +9,6 @@ const initPswUrl = serverUrl+'/user/initPsw'
 const {confirm} = Modal;
 
 class UserList extends React.Component {
-    constructor(props) {
-        super(props);
-        //有一点需要注意的是下面onShowSizeChange onChange定义不能使用 箭头函数，具体原因还不明
-        /*this.onShowSizeChange = this.onShowSizeChange.bind(this);
-        this.onChange = this.onChange.bind(this)*/
-    }
-
     state = {
         data: [],
         pagination: {

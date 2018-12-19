@@ -33,7 +33,6 @@ class ContentHeader extends React.Component {
     render() {
         return (
             <div className="container" style={{paddingRight:'40px'}}>
-                <img src={LOGO} alt="浙江中海达空间信息技术有限公司" className="logoImg"/>
                 <Menu
                     className="menu"
                     onClick={this.handleClick}

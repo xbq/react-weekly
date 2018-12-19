@@ -1,7 +1,10 @@
 import React from 'react'
 import {Route,Redirect} from 'react-router-dom'
+import {globalVar} from '../../util'
 
-function ProtectRoute({ component: Component,fakeAuth:fakeAuth, ...rest }) {
+
+let {fakeAuth} = globalVar;
+function ProtectRoute({ component: Component, ...rest }) {
     return (
         <Route
             {...rest}
@@ -11,7 +14,7 @@ function ProtectRoute({ component: Component,fakeAuth:fakeAuth, ...rest }) {
                 ) : (
                     <Redirect
                         to={{
-                            pathname: "/",
+                            pathname: "/login",
                             state: { from: props.location }
                         }}
                     />

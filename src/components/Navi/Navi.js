@@ -1,6 +1,6 @@
 import React from 'react'
 import {Layout, Menu, Icon} from 'antd';
-import {BrowserRouter,Route,withRouter,NavLink,Switch} from 'react-router-dom'
+import {Route, withRouter, NavLink, Switch,Redirect} from 'react-router-dom'
 import './Navi.less'
 import Users from '../Users/UserList'
 import ProjectList from '../Projects/ProjectList'
@@ -15,74 +15,68 @@ class Navi extends React.Component {
 
     onCollapse = (collapsed) => {
         console.log(collapsed);
-        this.setState({ collapsed });
+        this.setState({collapsed});
     }
 
     render() {
+        const {match} = this.props;
         return (
-            <BrowserRouter>
-                <Layout style={{ minHeight: '100vh' }}>
-                    <Sider
-                        collapsible
-                        collapsed={this.state.collapsed}
-                        onCollapse={this.onCollapse}
-                    >
+            <Layout style={{minHeight: '100vh'}}>
+                <Sider
+                    collapsible
+                    collapsed={this.state.collapsed}
+                    onCollapse={this.onCollapse}
+                >
+                    <div className="logo"></div>
+                    <Menu theme="dark" defaultSelectedKeys={['/projects']} mode="inline">
+                        <Menu.Item key="/projects">
+                            <NavLink to={`${match.path}/projects/`}>
+                                <Icon type="user"/>
+                                <span>项目管理</span>
+                            </NavLink>
+                        </Menu.Item>
+                        <Menu.Item key="/weekly">
+                            <NavLink to={`${match.path}/weekly/`}>
+                                <Icon type="file-search"/>
+                                <span>周报管理</span>
+                            </NavLink>
 
-                            <div className="logo" >
-
-                            </div>
-
-
-                        <Menu theme="dark" defaultSelectedKeys={['/projects']} mode="inline">
-                            <Menu.Item key="/projects">
-                                <NavLink to="/projects">
-                                    <Icon type="user" />
-                                    <span>项目管理</span>
-                                </NavLink>
-                            </Menu.Item>
-                            <Menu.Item key="/weekly">
-                                <NavLink to="/weekly">
-                                    <Icon type="file-search" />
-                                    <span>周报管理</span>
-                                </NavLink>
-
-                            </Menu.Item>
-                            <Menu.Item key="/approve">
-                                <NavLink to="/approve">
-                                    <Icon type="file-done" />
-                                    <span>周报审批</span>
-                                </NavLink>
-                            </Menu.Item>
-                            <Menu.Item key="/users">
-                                <NavLink to="/users">
-                                    <Icon type="user" />
-                                    <span>用户管理</span>
-                                </NavLink>
-                            </Menu.Item>
-                        </Menu>
-                    </Sider>
-                    <Layout>
-                        <Header style={{ background: '#fff', padding: 0 }}>
-                            <ContentHeader></ContentHeader>
-                        </Header>
-                        <Content style={{ margin: '0 16px' }}>
-                            <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
-                                <Switch>
-                                    <Route path="/projects" component={ProjectList}></Route>
-                                    <Route path="/weekly" component={Users}></Route>
-                                    <Route path="/approve" component={Users}></Route>
-                                    <Route path="/users" component={Users}></Route>
-                                </Switch>
-
-                            </div>
-                        </Content>
-                        <Footer style={{ textAlign: 'center' }}>
-                            中海达项目管理系统 ©2018 Created by xbq
-                        </Footer>
-                    </Layout>
+                        </Menu.Item>
+                        <Menu.Item key="/approve">
+                            <NavLink to={`${match.path}/approve/`}>
+                                <Icon type="file-done"/>
+                                <span>周报审批</span>
+                            </NavLink>
+                        </Menu.Item>
+                        <Menu.Item key="/users">
+                            <NavLink to={`${match.path}/users/`}>
+                                <Icon type="user"/>
+                                <span>用户管理</span>
+                            </NavLink>
+                        </Menu.Item>
+                    </Menu>
+                </Sider>
+                <Layout>
+                    <Header style={{background: '#fff', padding: 0}}>
+                        <ContentHeader></ContentHeader>
+                    </Header>
+                    <Content style={{margin: '0 16px'}}>
+                        <div style={{padding: 24, background: '#fff', minHeight: 360}}>
+                            <Switch>
+                                <Route path={`${match.path}/projects/`} component={ProjectList}/>
+                                <Route path={`${match.path}/weekly/`} component={Users}/>
+                                <Route path={`${match.path}/approve/`} component={Users}/>
+                                <Route path={`${match.path}/users/`} component={Users}/>
+                                {/*配置默认路由，跳转到该页面时，路由是/manage/  我们要向默认跳转到projects就要依赖redirect*/}
+                                <Redirect path={`${match.path}/`} to={{pathname: `${match.path}/projects`}} />
+                            </Switch>
+                        </div>
+                    </Content>
+                    <Footer style={{textAlign: 'center'}}>
+                        中海达项目管理系统 ©2018 Created by xbq
+                    </Footer>
                 </Layout>
-            </BrowserRouter>
-
+            </Layout>
         );
     }
 }
