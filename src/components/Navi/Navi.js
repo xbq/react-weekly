@@ -3,8 +3,11 @@ import {Layout, Menu, Icon} from 'antd';
 import {Route, withRouter, NavLink, Switch,Redirect} from 'react-router-dom'
 import './Navi.less'
 import Users from '../Users/UserList'
+import UserEdit from '../Users/UserEdit'
 import ProjectList from '../Projects/ProjectList'
 import ContentHeader from '../ContentHeader'
+import ProtectRoute from "../ProtectRoute";
+
 
 const {Header, Content, Footer, Sider} = Layout;
 
@@ -63,10 +66,13 @@ class Navi extends React.Component {
                     <Content style={{margin: '0 16px'}}>
                         <div style={{padding: 24, background: '#fff', minHeight: 360}}>
                             <Switch>
-                                <Route path={`${match.path}/projects/`} component={ProjectList}/>
-                                <Route path={`${match.path}/weekly/`} component={Users}/>
-                                <Route path={`${match.path}/approve/`} component={Users}/>
-                                <Route path={`${match.path}/users/`} component={Users}/>
+                                <ProtectRoute path={`${match.path}/projects/`} component={ProjectList}/>
+                                <ProtectRoute path={`${match.path}/weekly/`} component={Users}/>
+                                <ProtectRoute path={`${match.path}/approve/`} component={Users}/>
+
+                                <ProtectRoute path={`${match.path}/users/:id`} component={UserEdit}/>
+                                <ProtectRoute exact path={`${match.path}/users/`} component={Users}/>
+
                                 {/*配置默认路由，跳转到该页面时，路由是/manage/  我们要向默认跳转到projects就要依赖redirect*/}
                                 <Redirect path={`${match.path}/`} to={{pathname: `${match.path}/projects`}} />
                             </Switch>

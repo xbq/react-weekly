@@ -44,7 +44,8 @@ class UserList extends React.Component {
     }
 
     editUser(user) {
-        console.log(user);
+        const {match} = this.props;
+        this.props.history.push(`${match.path}${user.id}`);
     }
 
     deletUser(user) {

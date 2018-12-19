@@ -12,7 +12,7 @@ function ProtectRoute({ component: Component, ...rest }) {
                 fakeAuth.isAuthenticated ? (
                     <Component {...props} />
                 ) : (
-                    <Redirect
+                    <Redirect exact path="/"
                         to={{
                             pathname: "/login",
                             state: { from: props.location }
