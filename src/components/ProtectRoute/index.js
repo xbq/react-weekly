@@ -1,27 +1,18 @@
+
 import React from 'react'
-import {Route,Redirect} from 'react-router-dom'
-import {globalVar} from '../../util'
+import { Route, Redirect, } from 'react-router-dom'
+import { isAuthenticated } from '../../util'
 
+const ProtectRoute = ({component: Component, ...rest}) => (
 
-let {fakeAuth} = globalVar;
-function ProtectRoute({ component: Component, ...rest }) {
-    return (
-        <Route
-            {...rest}
-            render={props =>
-                fakeAuth.isAuthenticated ? (
-                    <Component {...props} />
-                ) : (
-                    <Redirect exact path="/"
-                        to={{
-                            pathname: "/login",
-                            state: { from: props.location }
-                        }}
-                    />
-                )
-            }
-        />
-    );
-}
+    <Route {...rest} render={(props) => (
+        !!isAuthenticated()
+            ? <Component {...props} />
+            : <Redirect to={{
+                pathname: '/login',
+                state: {from: props.location}
+            }}/>
+    )}/>
+)
 
 export default ProtectRoute

@@ -18,6 +18,7 @@ class UserEdit extends React.Component {
         const {id} = this.props.match.params;
 
         getRequest(serverUrl + '/user/findById', {id}).then((res) => {
+            console.log(res);
             this.setState({
                 user: res.data.user
             })
@@ -133,17 +134,17 @@ class UserEdit extends React.Component {
                             optionFilterProp="children"
                             filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
                         >
-                            <Option value='1'>管理员</Option>
-                            <Option value='3'>总经理</Option>
-                            <Option value='4'>副总经理</Option>
-                            <Option value='5'>部门总监</Option>
-                            <Option value='6'>部门副总监</Option>
-                            <Option value='7'>产品经理</Option>
-                            <Option value='8'>研发工程师</Option>
-                            <Option value='9'>项目实施</Option>
-                            <Option value='10'>技术支持</Option>
-                            <Option value='11'>美工</Option>
-                            <Option value='12'>项目经理</Option>
+                            <Option value="1">管理员</Option>
+                            <Option value="3">总经理</Option>
+                            <Option value="4">副总经理</Option>
+                            <Option value="5">部门总监</Option>
+                            <Option value="6">部门副总监</Option>
+                            <Option value="7">产品经理</Option>
+                            <Option value="8">研发工程师</Option>
+                            <Option value="9">项目实施</Option>
+                            <Option value="10">技术支持</Option>
+                            <Option value="11">美工</Option>
+                            <Option value="12">项目经理</Option>
                         </Select>
                     )}
                 </FormItem>
