@@ -1,5 +1,6 @@
-import React from  'react'
-import { Menu, Icon } from 'antd';
+import React from 'react'
+import {withRouter} from 'react-router-dom'
+import {Menu, Icon} from 'antd';
 import LOGO from '../../assets/images/logo.png'
 import './ContentHeader.less'
 import {getRequest,globalVar} from "../../util";
@@ -10,6 +11,20 @@ const {serverUrl} = globalVar;
 const loginoutUrl = serverUrl+'/logout'
 
 const SubMenu = Menu.SubMenu;
+const AuthButton = withRouter(
+    ({history}) =>
+        (
+            <span
+                onClick={() => {
+                    logout();
+                    history.push("/login")
+                }}
+            >
+                退出
+            </span>
+        )
+);
+
 class ContentHeader extends React.Component {
     state = {
         current: 'mail',
@@ -21,14 +36,6 @@ class ContentHeader extends React.Component {
         });
     }
 
-    handlelogout(){
-        getRequest(loginoutUrl).then(()=>{
-            //1、清空登录信息
-
-            //2、返回登录页，下面的做法还是有点儿问题
-            history.push('/');
-        })
-    }
 
     render() {
         return (
@@ -40,9 +47,9 @@ class ContentHeader extends React.Component {
                     mode="horizontal"
                 >
                     <Menu.Item key="index">
-                        <Icon type="appstore" />首页
+                        <Icon type="appstore"/>首页
                     </Menu.Item>
-                    <SubMenu title={<span className="submenu-title-wrapper"><Icon type="user" />当前用户</span>}>
+                    <SubMenu title={<span className="submenu-title-wrapper"><Icon type="user"/>当前用户</span>}>
                         <Menu.Item key="setting:1">个人信息</Menu.Item>
                         <Menu.Item key="setting:2">安全设置</Menu.Item>
                     </SubMenu>

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Table } from 'antd';
-import {getRequest} from '../../util'
+import {getRequest} from '../util/util'
 
 
 const columns = [{
@@ -60,6 +60,7 @@ class ProjectList extends React.Component {
     }
 
     render() {
+        console.log(this.state);
         return (
             <Table
                 columns={columns}

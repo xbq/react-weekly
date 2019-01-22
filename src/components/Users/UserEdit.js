@@ -2,7 +2,7 @@ import React from 'react';
 import {
     Form, Input, Select, Button, AutoComplete,
 } from 'antd';
-import {getRequest, globalVar, postRequest} from '../../util'
+import {getRequest, globalVar, postRequest} from '../util/util'
 
 const {serverUrl} = globalVar;
 const FormItem = Form.Item;
